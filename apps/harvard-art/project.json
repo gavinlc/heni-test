@@ -1,0 +1,84 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/harvard-art/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/harvard-art",
+        "index": "apps/harvard-art/src/index.html",
+        "baseHref": "/",
+        "main": "apps/harvard-art/src/main.tsx",
+        "polyfills": "apps/harvard-art/src/polyfills.ts",
+        "tsConfig": "apps/harvard-art/tsconfig.app.json",
+        "assets": [
+          "apps/harvard-art/src/favicon.ico",
+          "apps/harvard-art/src/assets"
+        ],
+        "styles": ["apps/harvard-art/src/styles.scss"],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/harvard-art/src/environments/environment.ts",
+              "with": "apps/harvard-art/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "harvard-art:build",
+        "hmr": true,
+        "proxyConfig": "apps/harvard-art/proxy.conf.json"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "harvard-art:build:development"
+        },
+        "production": {
+          "buildTarget": "harvard-art:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/harvard-art/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/harvard-art"],
+      "options": {
+        "jestConfig": "apps/harvard-art/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
