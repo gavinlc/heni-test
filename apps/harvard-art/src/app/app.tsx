@@ -28,8 +28,8 @@ export const App = () => {
   };
 
   return (
-    <Container maxWidth="lg">
-      <h1>Welcome to harvard-art!</h1>
+    <Container maxWidth="lg" sx={{marginBottom: 20}}>
+      <h1>Welcome to Harvard Print Gallery!</h1>
       <div>
         {status === "loading" ? (
           "Loading..."
@@ -41,7 +41,7 @@ export const App = () => {
               {data.prints.records.map((print) => (
                 <ImageListItem key={print.id}>
                   <img
-                    src={`${print.images[0]?.baseimageurl}?w=248&fit=crop&auto=format`}
+                    src={`${print.images[0]?.baseimageurl || `assets/placeholder612x612.jpg`}?w=248&fit=crop&auto=format`}
                     srcSet={`${print.images[0]?.baseimageurl}?w=248&fit=crop&auto=format&dpr=2 2x`}
                     alt={print.title}
                     loading="lazy"

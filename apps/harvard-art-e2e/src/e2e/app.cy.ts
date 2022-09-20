@@ -4,6 +4,6 @@ describe('harvard-art', () => {
   beforeEach(() => cy.visit('/'));
 
   it('should display welcome message', () => {
-    getGreeting().contains('Welcome to harvard-art!');
+    getGreeting().contains('Welcome to Harvard Print Gallery!');
   });
 });
